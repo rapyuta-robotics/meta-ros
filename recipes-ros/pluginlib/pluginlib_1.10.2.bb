@@ -4,9 +4,7 @@ SECTION = "devel"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://package.xml;beginline=9;endline=9;md5=d566ef916e9dedc494f5f793a6690ba5"
 
-DEPENDS = "boost class-loader rosconsole roslib libtinyxml libpthread-stubs"
-
-LDFLAGS += "-lpthread"
+DEPENDS = "boost class-loader rosconsole roslib libtinyxml"
 
 SRC_URI = "https://github.com/ros/${ROS_SPN}/archive/${PV}.tar.gz;downloadfilename=${ROS_SP}.tar.gz"
 SRC_URI[md5sum] = "f839e0d81741d0f2f6aca175e28ba1c5"
