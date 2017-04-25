@@ -2,15 +2,17 @@
 # Copyright (c) 2013 Stefan Herbrechtsmeier, Bielefeld University
 #
 
-inherit cmake distutils-base ros faulty-solibs
+ROS_USE_PYTHON3 ??= "no"
 
-# Prepend build dependency on "catkin-runtime" and "catkin-native"
+inherit cmake ${@'distutils3-base' if bb.utils.to_boolean(d.getVar('ROS_USE_PYTHON3', True)) else 'distutils-base'} ros faulty-solibs
+
+# Prepend build dependency on "catkin-native"
 # if the package is not "catkin" or "catkin-runtime"
-DEPENDS_prepend = "${@['catkin-runtime catkin-native ', ''][(d.getVar('BPN', True) == 'catkin') | (d.getVar('BPN', True) == 'catkin-runtime')]}"
+DEPENDS_prepend = "${@'' if (d.getVar('BPN', True) == 'catkin') or (d.getVar('BPN', True) == 'catkin-runtime') else 'catkin-native '}"
 
 # Prepend run dependency on "catkin" for *-dev packages
 # if the package is not "catkin" or "catkin-runtime"
-RDEPENDS_${PN}_prepend_class-dev = "${@['catkin ', ''][(d.getVar('BPN', True) == 'catkin') | (d.getVar('BPN', True) == 'catkin-runtime')]}"
+RDEPENDS_${PN}_prepend_class-dev = "${@'' if (d.getVar('BPN', True) == 'catkin') or (d.getVar('BPN', True) == 'catkin-runtime') else 'catkin '}"
 
 EXTRA_OECMAKE_CATKIN = "\
     -DCMAKE_PREFIX_PATH='${STAGING_DIR_HOST}${ros_prefix};${STAGING_DIR_HOST}${prefix};${STAGING_DIR_NATIVE}${ros_prefix};${STAGING_DIR_NATIVE}${prefix}' \
