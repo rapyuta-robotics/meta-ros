@@ -20,6 +20,8 @@ FILES_${PN}-dev = "\
     ${datadir}/${ROS_BPN}/*.template \
     "
 
+DEPENDS_class-native += "catkin-runtime"
+
 RDEPENDS_${PN} += "\
     cmake \
     make \

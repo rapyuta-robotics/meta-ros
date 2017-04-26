@@ -28,7 +28,6 @@ FILES_${PN}-dev = ""
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-datetime \
-    ${PYTHON_PN}-docutils \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-multiprocessing \
     ${PYTHON_PN}-shell \
